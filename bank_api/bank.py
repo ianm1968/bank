@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import Set, List
+from unicodedata import decimal
 
 class Account:
     name: str
@@ -47,4 +48,5 @@ class Bank:
         """Add funds to the named account"""
         account = self.get_account(name)
         now = datetime.now()
-        self.transactions.append(Transaction(account, now, amount))
+        if amount != 0:
+            self.transactions.append(Transaction(account, now, amount))

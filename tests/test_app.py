@@ -15,7 +15,17 @@ def client():
 
 def test_account_creation(client: FlaskClient):
     # Use the client to make requests e.g.:
-    # client.post(...)
-    # client.get(...)
-    # https://flask.palletsprojects.com/en/1.1.x/testing/
-    pass
+    something = client.post('/accounts/Fred Bloggs')
+    assert something.status_code == 200
+
+def test_account_creation_then_get(client: FlaskClient):
+    # Use the client to make requests e.g.:
+    something = client.post('/accounts/Fred Bloggs')
+    something = client.get('/accounts/Fred Bloggs')
+    assert something.status_code == 200
+
+
+def test_account_get_without_creation(client: FlaskClient):
+    # Use the client to make requests e.g.:
+    something = client.get('/accounts/Fred Bloggs')
+    assert something.status_code == 404
